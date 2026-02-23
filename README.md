@@ -1,29 +1,37 @@
-# CST-310 Project 4 — Rendering a Scene with Primitives (OpenGL + GLUT)
+# CST-310 Project 5 — Realistic Scene Upgrade (OpenGL + GLUT + Shaders)
 
 ## Overview
-This program renders a simplified architectural scene using **OpenGL (fixed-function pipeline)** and **GLUT**.  
-The scene is built from **scaled cubes** (primitives) to represent:
-- Ground and tan tile floor reference
-- Left/right brick walls
-- Window tower with 3 stacked color sections
-- Entrance recess and glass doors
+This project is a **direct continuation of Project 4**, but the scene is upgraded to look significantly more realistic. Instead of relying only on basic GLUT primitives, the scene is rendered using a **cube mesh (VAO/VBO/EBO)** and a **custom GLSL shader pipeline** to add lighting + surface shading.
 
-A virtual camera is implemented using `gluLookAt`, and a perspective projection is implemented using `gluPerspective`.
+The scene recreates the same building-style layout:
+- Large concrete ground base
+- Tan tiled walkway in front of the entrance (with repeated tiles + slight variation)
+- Left/right brick wall sections (brick detail vs. flat color from Project 4)
+- Central glass/window tower (more detailed paneling)
+- Entrance door structure
 
 ---
 
-## Features
-- OpenGL + GLUT window
-- Depth testing (`glEnable(GL_DEPTH_TEST)`)
-- Perspective projection (`gluPerspective`)
-- Camera/view setup (`gluLookAt`)
-- Scene built from primitives (`glutSolidCube` + `glScalef`)
+## Key Improvements vs. Project 4
+- **Modern shader pipeline (GLSL 330 core)** with per-fragment lighting (ambient + diffuse + specular)
+- **Mesh-based cube rendering** (cube vertices + normals + indexed triangles)
+- **More detail/complexity** (brick patterning, tiled ground, window/door detailing)
+- **Movable virtual camera** for viewing the scene dynamically
+
+---
+
+## Controls
+- `W` / `S` → move forward/back (Z)
+- `A` / `D` → move left/right (X)
+- `Q` / `E` → move down/up (Y)
+- `+` / `-` → zoom in/out (if enabled in your keyboard handler)
+- `ESC` → quit
 
 ---
 
 ## Requirements (Ubuntu)
-Install GLUT + OpenGL development packages:
+Install OpenGL/GLUT + GLEW:
 
 ```bash
 sudo apt update
-sudo apt install build-essential freeglut3-dev mesa-utils
+sudo apt install build-essential freeglut3-dev libglew-dev mesa-utils
